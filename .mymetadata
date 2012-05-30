@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="tribus"
+  id="myeclipse.1332622550752"
+  context-root="/tribus"
+  j2ee-spec="5.0"
+  archive="tribus.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
