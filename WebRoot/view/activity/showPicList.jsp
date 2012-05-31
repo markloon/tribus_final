@@ -87,7 +87,8 @@ request.setAttribute("path1",GlobleConfig.pathPath);
                 	<div id="album_type">
                     	<ul>
                         	<li class="album"></li>  
-                            <li><a href="activity/addPicIndex.action?activityId=${activityId }">Upload New Picture</a></li>
+                           
+                            <li><c:choose><c:when test="${flag==1}"><a href="activity/addPicIndex.action?activityId=${activityId}">Upload New Picture</a></c:when></c:choose></li>
                         </ul>
                     </div>
                     <div id="gallery"><!--start gallery-->

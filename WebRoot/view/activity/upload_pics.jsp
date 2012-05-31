@@ -504,12 +504,19 @@
                     </div><!--//end .edit_album_widget-->
                     <div class="clear"></div>
 						
-						
+						<c:choose><c:when test="${flag==1}">
 						
 						<div class="save_edit">
 							<input type="button" id="save_button" name="Save" value="Save" disabled=true onclick="javascript:getValues();" >upload
 						</div>
-					
+					</c:when>
+					</c:choose>
+					<div id="footer">
+					<p>
+						Copyright @ Tribus.us 2012.
+						<span>All rights reserved</span>
+					</p>
+				</div>
 					</div>
 					<!--//end #edit_album_content-->
 					
@@ -597,12 +604,7 @@
 
 									
 				<!--//end #common_maincontent-->
-				<div id="footer">
-					<p>
-						Copyright @ Tribus.us 2012.
-						<span>All rights reserved</span>
-					</p>
-				</div>
+				
 			</div>
 			<!--//end #main_area-->
 		</div>

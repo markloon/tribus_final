@@ -112,7 +112,7 @@ request.setAttribute("path1",GlobleConfig.pathPath);
 							
                         </div>
 						 <p class="edit_message">
-                        	<textarea id="picDescription${i.index }" name="picDescription${i.index }" rows="10" cols="10" onclick="if(this.value=='Introduction')(this.value='')" onblur="if(this.value=='')(this.value='Introduction')"><c:choose><c:when test="${item.albumDescription!=null}">${item.albumDescription}</c:when><c:otherwise>Introduction</c:otherwise></c:choose></textarea>
+                        	<textarea  <c:choose><c:when test="${flag==0}"> readonly=true </c:when></c:choose> id="picDescription${i.index }" name="picDescription${i.index }" rows="10" cols="10" onclick="if(this.value=='Introduction')(this.value='')" onblur="if(this.value=='')(this.value='Introduction')"><c:choose><c:when test="${item.albumDescription!=null}">${item.albumDescription}</c:when><c:otherwise>Introduction</c:otherwise></c:choose></textarea>
                         </p>
                     </div><!--//end .edit_album_widget-->
                    <c:choose>
@@ -192,10 +192,12 @@ request.setAttribute("path1",GlobleConfig.pathPath);
             </c:forEach>
                             <a href="#" class="next"></a>
                     	</div>
+              <c:choose><c:when test="${flag==1}">
               <div class="save_edit">
 <input type="button" id="save_button" name="Save" value="Save"  onclick="javascript:getValues();" >
 
 </div>
+</c:when></c:choose>
  <div id="footer"><p>Copyright @ Tribus.us 2012.      <span>All rights reserved</span> </p></div>
     </div><!--//end #wrapper-->
   </body>

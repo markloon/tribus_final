@@ -308,16 +308,20 @@ onblur="if(this.value=='')(this.value='Music, Musicial, Album, tribus music list
 						<!--//end .calender-->
 						<div class="ranger">
 							<img src="${path1}activity/img/bgr_ranger.png" alt="" />
-						</div>
+						</div>	
+						<c:choose><c:when test="${flag==1}">
 						<div class="ranger_icon">
 							<a href="activity/activityCreatInit.action"><img src="${path1}activity/img/icon_ranger.png" alt="" />
 							</a>
 						</div>
+					
 						<div class="event_btn">
 							<a href="activity/activityCreatInit.action"><span><span>Create your Event</span>
 							</span>
 							</a>
 						</div>
+						</c:when>
+						</c:choose>
 						<div id="common_content_area">
 							<!--start common_content_area-->
 							<%if(session.getAttribute("user")==null) {%>
@@ -380,8 +384,8 @@ onblur="if(this.value=='')(this.value='Music, Musicial, Album, tribus music list
 														<ul>
 															<c:forEach items="${item.userComments}" var="item">
 																<li>
-																	<span><a href="user/my/${item.userId}"><img src="${item.userPic}" alt="" width=41 height=39/>
-																	</span><small>: ${item.userComment }</small>
+																	<span><a href="user/my/${item.userId}"><img src="${item.userPic}" alt="" width=41 height=39/></a>
+																	</span><small>: ${item.userComment}</small>
 																</li>
 															</c:forEach>
 														</ul>
@@ -456,7 +460,7 @@ onblur="if(this.value=='')(this.value='Music, Musicial, Album, tribus music list
 															<c:forEach items="${item.userComments}" var="item">
 																<li>
 																	<span><a href="user/my/${item.userId}"><img src="${item.userPic}" alt="" />
-																	</span><small>: ${item.userComment }</small>
+																	</span><small>: ${item.userComment}</small>
 																</li>
 															</c:forEach>
 														</ul>
@@ -541,8 +545,7 @@ onblur="if(this.value=='')(this.value='Music, Musicial, Album, tribus music list
 										</li>
 									</c:forEach>
 								</ul>
-								<small><a href="#">Add</a> / <a href="#">Change</a>
-									Locations</small>
+							
 							</div>
 						</div>
 						<!--//end .widget-->

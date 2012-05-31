@@ -275,7 +275,7 @@ function getResult() {
                         <div id="product_twocol"><!--start product_twocol-->
                         	<div id="product_lftcol"><img src="${activityInfo.activityPic}" alt="" width="313" height="417" /></div>
                             <div id="product_rgtcol"><!--start product_rgtcol-->
-                            	<p>Start Date: ${activityInfo.activityStartTime}<br />End Date: ${activityInfo.activityFinishTime}<br />PLace: Chicago 1901 West Madison Street<br />Starter:<br />
+                            	<p>Start Date: ${activityInfo.activityStartTime}<br />End Date: ${activityInfo.activityFinishTime}<br />PLace: ${activityInfo.activityCity} ${activityInfo.activityStreet} ${activityInfo.activityState}<br />Starter:<br />
                                 Type: ${activityClassified}<br />Fees: ${activityInfo.activityFees} USD</p>
                                 <div class="wish_listbox">
                                 	<ul>
@@ -342,12 +342,12 @@ function getResult() {
                       <%}else{ %>
                         <div class="brief_gallery"><!--start brief_gallery-->
                         	<h2>Activity Image &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;00000000000000000000000000000000000                  
-							   <span class="STYLE1"><a href="activity/addPicIndex.action?activityId=${activityId }">Upload New Picture</a></span></h2>
+							  <c:choose><c:when test="${flagg==1}"> <span class="STYLE1"><a href="activity/addPicIndex.action?activityId=${activityId }">Upload New Picture</a></span></h2></c:when></c:choose>
                         	
                            
                         </div><!--//end #brief_gallery-->
                       <%} %>
-                      <!--<a href="activity/addPicIndex.action?activityId=${activityId }">Upload New Picture</a>//end .video_box-->
+                    
                     </div>
                     <!--//end #brief_main-->
                     
@@ -409,7 +409,7 @@ function getResult() {
                     
                     
                     <div id="comment_pagination">
-                        <a href="#" class="prev"></a>
+                    
                          
                          
                          <c:forEach items="${pageNumbers}" var="item">  
@@ -417,7 +417,7 @@ function getResult() {
              ${item}
              </a>
             </c:forEach>
-                        <a href="#" class="next"></a>
+                   
                     </div>
                 </div><!--//end #review_lftcol-->
                 <div class="clear"></div>

@@ -401,6 +401,13 @@ public class ActivityController {
 		//			
 		// }
 
+Integer flag=0;
+		
+		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if(currentUser!=null){
+flag=1;
+		}
+		view.addObject("flag",flag);
 		List topTribusCity = activityDao.getTopTribusCity();
 		view.addObject("activityTagsList", activityTagsList);// ½«ËùÓĞ±êÇ©list·ÅÈëÈİÆ÷
 		view.addObject("topTribusCity", topTribusCity);// ·ÅÈëtopTribusCity
@@ -529,6 +536,17 @@ public class ActivityController {
 
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈİÆ÷´«»ØÒ³Ãæ
 
+		Integer flagg=0;
+		User establishUser=userDao.getUserById(activity.getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+		
+		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if(currentUser!=null){
+			if(currentUser.getUserId()==establishUser.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆğÓÃ»§ ËùÒÔÓĞÍ¼Æ¬ÉÏ´«µÄÈ¨ÏŞ
+			{flagg=1;
+				
+			}
+		}
+		view.addObject("flagg",flagg);
 		List recommentActivity = activityDao.getAllActivity();// È¡ÍÆ¼ö»î¶¯
 		recommentActivity = recommentActivity.subList(7, 10);// È¡ÍÆ¼ö»î¶¯
 		view.setViewName("activity/info");// ÉèÖÃ¶ÔÓ¦µÄÊÓÍ¼view/activity/info.jsp
@@ -963,6 +981,18 @@ public class ActivityController {
 		} else {
 			size = "1";
 		}
+		Integer flag=0;
+		User user=userDao.getUserById(activityDao.getActivityById(activityId).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+		HttpSession session=request.getSession();
+		
+		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if(currentUser!=null){
+			if(currentUser.getUserId()==user.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆğÓÃ»§ ËùÒÔÓĞÍ¼Æ¬ÉÏ´«µÄÈ¨ÏŞ
+			{flag=1;
+				
+			}
+		}
+		view.addObject("flag",flag);
 		view.addObject("size", size);// Èç¹ûÃ»ÓĞ´´½¨Ïà²á Ôò·ÅÈë´ËÖµ ´«»ØÒ³Ãæ¡£ÒÔ×÷¼ì²é
 		view.addObject("activityAlbumList", activityAlbumList);// ½«µÃµ½µÄ½á¹û·ÅÈëÈİÆ÷
 		view.addObject("activityId", activityId);// ½«activityId·ÅÈëÈİÆ÷
@@ -1232,7 +1262,19 @@ public class ActivityController {
 		for (Integer i = 0; i < pageNumbers; i++) {
 			pages[i] = i + 1 + "";
 		}
+		
 
+		Integer flag=0;
+		User user=userDao.getUserById(activityDao.getActivityById(activityId).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+		
+		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if(currentUser!=null){
+			if(currentUser.getUserId()==user.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆğÓÃ»§ ËùÒÔÓĞÍ¼Æ¬ÉÏ´«µÄÈ¨ÏŞ
+			{flag=1;
+				
+			}
+		}
+		view.addObject("flag",flag);
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈİÆ÷´«»ØÒ³Ãæ
 		view.addObject("activityId", activityId);
 		view.addObject("activityAlbumList", result);
@@ -1375,6 +1417,17 @@ if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ
 			pages[i] = i + 1 + "";
 		}
 
+		Integer flag=0;
+		User user=userDao.getUserById(activityPics.get(0).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+		HttpSession session=request.getSession();
+		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if(currentUser!=null){
+			if(currentUser.getUserId()==user.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆğÓÃ»§ ËùÒÔÓĞÍ¼Æ¬ÉÏ´«µÄÈ¨ÏŞ
+			{flag=1;
+				
+			}
+		}
+		view.addObject("flag",flag);
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈİÆ÷´«»ØÒ³Ãæ
 		view.addObject("activityAlbum", activityAlbumList.get(0));
 		view.addObject("activityPics", result);// ½«activityPics·ÅÈëÈİÆ÷
@@ -1459,8 +1512,9 @@ if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ
 		for (Integer i = 0; i < pageNumbers; i++) {
 			pages[i] = i + 1 + "";
 		}
-
+      //  Integer flag=0;//0ÎªÓĞ×Ê¸ñÉÏ´« 1ÎªÃ»ÓĞ×Ê¸ñÉÏ´«
 		User user=userDao.getUserById(activityPics.get(0).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+		
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈİÆ÷´«»ØÒ³Ãæ
 		view.addObject("userCommentList", result);
 		view.addObject("albumName", albumName);
