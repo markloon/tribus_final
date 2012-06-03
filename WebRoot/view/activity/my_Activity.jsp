@@ -9,6 +9,7 @@ List<MyActivity> activity=(List<MyActivity>) request.getAttribute("activityList"
 String detail=null;
 String condition=(String)request.getAttribute("condition");
 request.setAttribute("path1",GlobleConfig.pathPath);
+request.setAttribute("path2",GlobleConfig.pathPath1);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -115,17 +116,27 @@ function getResult() {
   </head>
   
   <body>
- <div id="wrapper">=$<!--start wrapper-->
+ <div id="wrapper"><!--start wrapper-->
     	<div id="header"><!--start header-->
-        	<div class="logo"><a href="index.html"><img src="${path1}activity/img/logo.png" alt="" /></a></div>
+        	<div class="logo"><a href="${path2}activity/index.action"><img src="${path1}activity/img/logo.png" alt="" /></a></div>
             <div id="header_rgt"><!--start header_rgt-->
             	<div id="menu_bg"><div id="menu_lft"><div id="menu_rgt">
                     <ul>
-                    	<li class="current_page_item"><a href="#">CITY</a></li>
-                    	<li><a href="#" title="MOVIE">MOVIE</a></li>
-                        <li><a href="#" title="BOOK">BOOK</a></li>
-                        <li><a href="#" title="MUSIC">MUSIC</a></li>
-                        <li><a href="#" title="MY TRIBUS">MY TRIBUS</a></li>
+                    	<li class="current_page_item">
+										<a href="${path2}activity/index.action">CITY</a>
+									</li>
+									<li>
+										<a href="${path2}movie/movieHomePage.action" title="MOVIE">MOVIE</a>
+									</li>
+									<li>
+										<a href="${path2}book/bookHomePage.action" title="BOOK">BOOK</a>
+									</li>
+									<li>
+										<a href="${path2}music/musicHomePage.action" title="MUSIC">MUSIC</a>
+									</li>
+									<li>
+										<a href="${path2}user/my.action" title="user/my.action">MY TRIBUS</a>
+									</li>
                     </ul>
                     <div class="header_search">
                     	<form action="#">
@@ -161,7 +172,7 @@ function getResult() {
                             <a href="#"><img src="${path1}activity/img/icon_message4.jpg" alt="" /></a>
                         </div>
                         <div class="address">
-                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>">welcome back,<%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
+                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>"><%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
                             <span>New York City</span>
                         </div>
                     </div><!--//end #social_box-->
@@ -174,10 +185,7 @@ function getResult() {
                     	<div id="fiona_inner">
                             <img src="${path1}activity/img/pic_activity.jpg" alt="" />
                             <div class="activity_rgt">
-                                <a href="#" class="activity_btn1"></a>
-                                <a href="#" class="activity_btn2">This Week</a>
-                                <a href="#" class="activity_btn2">Next Week</a>
-                                <a href="#" class="activity_btn3"></a>
+   
                             </div>
                         </div>
                     </div><!--//end #title_my_activity-->
@@ -201,21 +209,8 @@ function getResult() {
                                             </div>
                                             <div class="feature_list">
                                                 <ul>
-                          <li>
-                              
-                               
-				                   <%if(activity.get(i)!=null &&activity.get(i).getOwner()==null) {%>
-				<input id="bt<%=i%>" type="button" name="Submit" value="<%if(activity.get(i).getFollowed()!=null &&activity.get(i).getFollowed().equals("true")){%>unfollow<%}else{%>Follow<%}%>" 
-			onclick="followActivity('activity/followActivity.action?activityId=<%=activity.get(i).getActivity().getActivityId() %>','bt<%=i %>')"/><%}else{ %>you are the host<%} %>
-				                
-				                     </li>
-				                    
-				                    <li>
-				                  <%if(activity.get(i)!=null && activity.get(i).getOwner()==null) { %>
-				                  <input id="at<%=i%>" type="button" name="Submit" value="<%if(activity.get(i).getJoined()!=null &&activity.get(i).getJoined().equals("true")){%>unjoin<%}else{%>join<%}%>" 
-			onclick="joinActivity('activity/joinActivity.action?activityId=<%=activity.get(i).getActivity().getActivityId() %>','at<%=i %>')"/> <%}else{ %>you are the host<%} %>  
-				                    
-				                    </li>
+              <li><a href="addWishList/city/${activityInfo.activityId}.action">+ Wish List</a></li>
+                                              <li><a href="addTribusList/city/${activityInfo.activityId}.action">+ Tribus List</a></li>
                                                 </ul>
                                             </div>
                                         </div><!--//end .feature_social-->

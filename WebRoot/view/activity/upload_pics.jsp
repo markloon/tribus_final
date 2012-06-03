@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*,config.GlobleConfig" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 	String path = request.getContextPath();
@@ -6,6 +6,9 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 			String size=(String) request.getAttribute("size");
+			request.setAttribute("path1",GlobleConfig.pathPath);
+			request.setAttribute("path2",GlobleConfig.pathPath1);
+			
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -24,11 +27,11 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 		<link rel="stylesheet" type="text/css" media="screen,projection"
-			href="../tribus/view/activity/font/font.css" />
+			href="${path1}activity/font/font.css" />
 		<link rel="stylesheet" type="text/css" media="screen,projection"
-			href="../tribus/view/activity/css/style.css" />
-			    <link href="../tribus/view/activity/css/browser.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="../tribus/view/js/jquery-1.6.2.min.js"></script>			
+			href="${path1}activity/css/style.css" />
+			    <link href="${path1}activity/css/browser.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${path1}js/jquery-1.6.2.min.js"></script>			
 		<script language="javascript">
 	function get11() {
 		$("#div11").show();
@@ -98,8 +101,8 @@
 			<div id="header">
 				<!--start header-->
 				<div class="logo">
-					<a href="index.html"><img
-							src="../tribus/view/activity/img/logo.png" alt="" width="59"
+					<a href="${path2}activity/index.action"><img
+							src="${path1}activity/img/logo.png" alt="" width="59"
 							height="65" />
 					</a>
 				</div>
@@ -110,19 +113,19 @@
 							<div id="menu_rgt">
 								<ul>
 									<li class="current_page_item">
-										<a href="#">CITY</a>
+										<a href="${path2}activity/index.action">CITY</a>
 									</li>
 									<li>
-										<a href="#" title="MOVIE">MOVIE</a>
+										<a href="${path2}movie/movieHomePage.action" title="MOVIE">MOVIE</a>
 									</li>
 									<li>
-										<a href="#" title="BOOK">BOOK</a>
+										<a href="${path2}book/bookHomePage.action" title="BOOK">BOOK</a>
 									</li>
 									<li>
-										<a href="#" title="MUSIC">MUSIC</a>
+										<a href="${path2}music/musicHomePage.action" title="MUSIC">MUSIC</a>
 									</li>
 									<li>
-										<a href="#" title="MY TRIBUS">MY TRIBUS</a>
+										<a href="${path2}user/my.action" title="MY TRIBUS">MY TRIBUS</a>
 									</li>
 								</ul>
 								<div class="header_search">
@@ -137,12 +140,12 @@
 								</div>
 								<div class="header_icon_area">
 									<span class="space_btm"><a href="#"><img
-												src="../tribus/view/activity/img/icon_header1.png" alt=""
+												src="${path1}activity/img/icon_header1.png" alt=""
 												width="10" height="11" />
 									</a>
 									</span>
 									<span><a href="#"><img
-												src="../tribus/view/activity/img/icon_header2.png" alt=""
+												src="${path1}activity/img/icon_header2.png" alt=""
 												width="12" height="13" />
 									</a>
 									</span>
@@ -170,11 +173,11 @@
 						<!--start social_media-->
 						<div id="social_lftcol">
 							<a href="#"><img
-									src="../tribus/view/activity/img/icon_facebook.jpg" alt=""
+									src="${path1}activity/img/icon_facebook.jpg" alt=""
 									width="24" height="24" />
 							</a>
 							<a href="#"><img
-									src="../tribus/view/activity/img/icon_tweet.jpg" alt=""
+									src="${path1}activity/img/icon_tweet.jpg" alt=""
 									width="24" height="24" />
 							</a>
 						</div>
@@ -182,19 +185,19 @@
 							<!--start social_box-->
 							<div id="message">
 								<a href="#"><img
-										src="../tribus/view/activity/img/icon_message1.jpg" alt=""
+										src="${path1}activity/img/icon_message1.jpg" alt=""
 										width="22" height="22" /><span>5</span>
 								</a>
 								<a href="#"><img
-										src="../tribus/view/activity/img/icon_message2.jpg" alt=""
+										src="${path1}activity/img/icon_message2.jpg" alt=""
 										width="22" height="22" />
 								</a>
 								<a href="#"><img
-										src="../tribus/view/activity/img/icon_message3.jpg" alt=""
+										src="${path1}activity/img/icon_message3.jpg" alt=""
 										width="22" height="22" />
 								</a>
 								<a href="#"><img
-										src="../tribus/view/activity/img/icon_message4.jpg" alt=""
+										src="${path1}activity/img/icon_message4.jpg" alt=""
 										width="22" height="22" />
 								</a>
 							</div>
@@ -223,12 +226,12 @@
 							
 							<div class="frame" id="container_1">
 								<div class="icon_edit">
-									<img src="../tribus/view/activity/img/icon_edit.jpg" alt=""
+									<img src="${path1}activity/img/icon_edit.jpg" alt=""
 										width="19" height="19" />
 								</div>
 							</div>
 							<form method="post" name="form12" id="form_upload1"
-				action="http://localhost:8080/tribus/uploadForm/uploadAction.action"
+				action="${path1}uploadForm/uploadAction.action"
 				enctype="multipart/form-data" target="hidden_frame_1">
 
 				
@@ -280,11 +283,11 @@
 						
 						 <div class="edit_album_widget"><!--start edit_album_widget-->
                     	<div class="frame" id="container_2">
-                        	<div class="icon_edit"><img src="../tribus/view/activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
+                        	<div class="icon_edit"><img src="${path1}activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
                         </div>
                         
                         <form method="post" name="form12" id="form_upload2"
-				action="http://localhost:8080/tribus/uploadForm/uploadAction.action"
+				action="${path1}uploadForm/uploadAction.action"
 				enctype="multipart/form-data" target="hidden_frame_2">
 
 				
@@ -324,12 +327,12 @@
 						
 						<div class="edit_album_widget padding_rgt_null"><!--start edit_album_widget-->
                     	<div class="frame" id="container_3">
-                        	<div class="icon_edit"><img src="../tribus/view/activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
+                        	<div class="icon_edit"><img src="${path1}activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
                         </div>
                         
                         
                         <form method="post" name="form12" id="form_upload3"
-				action="http://localhost:8080/tribus/uploadForm/uploadAction.action"
+				action="${path1}uploadForm/uploadAction.action"
 				enctype="multipart/form-data" target="hidden_frame_3">
 
 				
@@ -373,13 +376,13 @@
 						
 						 <div class="edit_album_widget"><!--start edit_album_widget-->
                     	<div class="frame" id="container_4">
-                        	<div class="icon_edit"><img src="../tribus/view/activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
+                        	<div class="icon_edit"><img src="${path1}activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
                         </div>
                         
                         
                         
                         <form method="post" name="form12" id="form_upload4"
-				action="http://localhost:8080/tribus/uploadForm/uploadAction.action"
+				action="${path1 }uploadForm/uploadAction.action"
 				enctype="multipart/form-data" target="hidden_frame_4">
 
 				
@@ -417,12 +420,12 @@
                     </div><!--//end .edit_album_widget-->
                     <div class="edit_album_widget"><!--start edit_album_widget-->
                     	<div class="frame" id="container_5">
-                        	<div class="icon_edit"><img src="../tribus/view/activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
+                        	<div class="icon_edit"><img src="${path1}activ${path1}it.jpg" alt="" width="19" height="19" /></div>
                         </div>
                         
                         
                         <form method="post" name="form12" id="form_upload5"
-				action="http://localhost:8080/tribus/uploadForm/uploadAction.action"
+				action="${path1}uploadForm/uploadAction.action"
 				enctype="multipart/form-data" target="hidden_frame_5">
 
 				
@@ -460,13 +463,13 @@
                     </div><!--//end .edit_album_widget-->
                     <div class="edit_album_widget padding_rgt_null"><!--start edit_album_widget-->
                     	<div class="frame" id="container_6">
-                        	<div class="icon_edit"><img src="../tribus/view/activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
+                        	<div class="icon_edit"><img src="${path1}activity/img/icon_edit.jpg" alt="" width="19" height="19" /></div>
                         </div>
                         
                         
                         
                         <form method="post" name="form12" id="form_upload6"
-				action="http://localhost:8080/tribus/uploadForm/uploadAction.action"
+				action="${path1}uploadForm/uploadAction.action"
 				enctype="multipart/form-data" target="hidden_frame_6">
 
 				

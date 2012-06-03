@@ -8,6 +8,7 @@ public class GlobleConfig {
 
 	
 	public static final String pathPath="../tribus/view/";
+	public static final String pathPath1="../tribus/";
 	
 	
 }

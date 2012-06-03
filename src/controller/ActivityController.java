@@ -264,8 +264,7 @@ public class ActivityController {
 
 			view.addObject("latestActivity", activityAfterFilter.get(0));
 		}
-		List activityGoingNumbersList = activityGoingDao
-				.getActivityGoingAsNumbers();// È¡³öÈý¸öÈË×î¶àµÄ»î¶¯
+		List activityGoingNumbersList = activityGoingDao.getActivityGoingAsNumbers();// È¡³öÈý¸ö²Î¼ÓÈËÊý×î¶àµÄ»î¶¯
 		List activityGoingMaxList = new ArrayList();// ´´½¨ volist
 		if (activityGoingNumbersList.size() < 3) {
 			// do nothing
@@ -276,13 +275,11 @@ public class ActivityController {
 				ActivityGoingMax activityGoingMax = new ActivityGoingMax();
 				ActivityGoingTempResult tempResult = (ActivityGoingTempResult) iteratorGoing
 						.next();
-				activityGoingMax.setActivityId(activityDao.getActivityById(// vo¶ÔÏó×é×°¿ªÊ¼
-						tempResult.getActivityId()).getActivityId());
-				activityGoingMax.setPicPath(activityDao.getActivityById(
-						tempResult.getActivityId()).getActivityPic());
+				Activity a = activityDao.getActivityById(tempResult.getActivityId());
+				activityGoingMax.setActivityId(a.getActivityId());// vo¶ÔÏó×é×°¿ªÊ¼
+				activityGoingMax.setPicPath(a.getActivityPic());
 				activityGoingMax.setNumbers(tempResult.getNumber());
-				activityGoingMax.setActivityName(activityDao.getActivityById(
-						tempResult.getActivityId()).getActivityName());
+				activityGoingMax.setActivityName(a.getActivityName());
 				activityGoingMax.setUserName(userDao.getUserById(
 						activityDao.getActivityById(tempResult.getActivityId())
 								.getUserId()).getUserAlias());
@@ -313,10 +310,9 @@ public class ActivityController {
 				UserComments userComments = new UserComments();
 				userComments.setUserComment(aComment.getCommentContent());
 				userComments.setUserId(aComment.getUserId());
-				userComments.setUserPic(userDao.getUserById(
-						aComment.getUserId()).getUserPic());
+				User uu=userDao.getUserById(aComment.getUserId());
+				userComments.setUserPic(uu.getUserPic());
 				comments.add(userComments);// ×é×°ºÃÆÀÂÛList
-
 			}
 			FriendComment friendComment = new FriendComment();
 			Activity a = activityDao.getActivityById(activityComment
@@ -401,13 +397,13 @@ public class ActivityController {
 		//			
 		// }
 
-Integer flag=0;
-		
-		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
-		if(currentUser!=null){
-flag=1;
+		Integer flag = 0;
+
+		User currentUser = (User) session.getAttribute("user");// µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if (currentUser != null) {
+			flag = 1;
 		}
-		view.addObject("flag",flag);
+		view.addObject("flag", flag);
 		List topTribusCity = activityDao.getTopTribusCity();
 		view.addObject("activityTagsList", activityTagsList);// ½«ËùÓÐ±êÇ©list·ÅÈëÈÝÆ÷
 		view.addObject("topTribusCity", topTribusCity);// ·ÅÈëtopTribusCity
@@ -536,17 +532,19 @@ flag=1;
 
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈÝÆ÷´«»ØÒ³Ãæ
 
-		Integer flagg=0;
-		User establishUser=userDao.getUserById(activity.getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
-		
-		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
-		if(currentUser!=null){
-			if(currentUser.getUserId()==establishUser.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§ ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
-			{flagg=1;
-				
+		Integer flagg = 0;
+		User establishUser = userDao.getUserById(activity.getUserId());// µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+
+		User currentUser = (User) session.getAttribute("user");// µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if (currentUser != null) {
+			if (currentUser.getUserId() == establishUser.getUserId())// ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§
+																		// ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
+			{
+				flagg = 1;
+
 			}
 		}
-		view.addObject("flagg",flagg);
+		view.addObject("flagg", flagg);
 		List recommentActivity = activityDao.getAllActivity();// È¡ÍÆ¼ö»î¶¯
 		recommentActivity = recommentActivity.subList(7, 10);// È¡ÍÆ¼ö»î¶¯
 		view.setViewName("activity/info");// ÉèÖÃ¶ÔÓ¦µÄÊÓÍ¼view/activity/info.jsp
@@ -981,18 +979,21 @@ flag=1;
 		} else {
 			size = "1";
 		}
-		Integer flag=0;
-		User user=userDao.getUserById(activityDao.getActivityById(activityId).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
-		HttpSession session=request.getSession();
-		
-		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
-		if(currentUser!=null){
-			if(currentUser.getUserId()==user.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§ ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
-			{flag=1;
-				
+		Integer flag = 0;
+		User user = userDao.getUserById(activityDao.getActivityById(activityId)
+				.getUserId());// µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+		HttpSession session = request.getSession();
+
+		User currentUser = (User) session.getAttribute("user");// µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if (currentUser != null) {
+			if (currentUser.getUserId() == user.getUserId())// ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§
+															// ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
+			{
+				flag = 1;
+
 			}
 		}
-		view.addObject("flag",flag);
+		view.addObject("flag", flag);
 		view.addObject("size", size);// Èç¹ûÃ»ÓÐ´´½¨Ïà²á Ôò·ÅÈë´ËÖµ ´«»ØÒ³Ãæ¡£ÒÔ×÷¼ì²é
 		view.addObject("activityAlbumList", activityAlbumList);// ½«µÃµ½µÄ½á¹û·ÅÈëÈÝÆ÷
 		view.addObject("activityId", activityId);// ½«activityId·ÅÈëÈÝÆ÷
@@ -1262,19 +1263,21 @@ flag=1;
 		for (Integer i = 0; i < pageNumbers; i++) {
 			pages[i] = i + 1 + "";
 		}
-		
 
-		Integer flag=0;
-		User user=userDao.getUserById(activityDao.getActivityById(activityId).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
-		
-		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
-		if(currentUser!=null){
-			if(currentUser.getUserId()==user.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§ ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
-			{flag=1;
-				
+		Integer flag = 0;
+		User user = userDao.getUserById(activityDao.getActivityById(activityId)
+				.getUserId());// µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+
+		User currentUser = (User) session.getAttribute("user");// µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if (currentUser != null) {
+			if (currentUser.getUserId() == user.getUserId())// ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§
+															// ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
+			{
+				flag = 1;
+
 			}
 		}
-		view.addObject("flag",flag);
+		view.addObject("flag", flag);
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈÝÆ÷´«»ØÒ³Ãæ
 		view.addObject("activityId", activityId);
 		view.addObject("activityAlbumList", result);
@@ -1397,13 +1400,15 @@ flag=1;
 		List activityAlbumList = activityAlbumDao.getActivityAlbumByCondition(
 				0, albumId);
 		List result = new ArrayList();// ×îÖÕµÄ½á¹û¼¯
-Integer activityId=0;
-if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ¯ ½á¹ûÎª¿Õ
-	
-}else{
-	activityId=activityAlbumDao.getActivityAlbumByCondition(0, albumId).get(0).getActivityId();
-	
-}
+		Integer activityId = 0;
+		if (activityAlbumDao.getActivityAlbumByCondition(0, albumId) == null) {// Èç¹ûÏà²á²éÑ¯
+																				// ½á¹ûÎª¿Õ
+
+		} else {
+			activityId = activityAlbumDao.getActivityAlbumByCondition(0,
+					albumId).get(0).getActivityId();
+
+		}
 		int page;
 		if (request.getParameter("page") == null) {
 			page = 1;
@@ -1417,21 +1422,23 @@ if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ
 			pages[i] = i + 1 + "";
 		}
 
-		Integer flag=0;
-		User user=userDao.getUserById(activityPics.get(0).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
-		HttpSession session=request.getSession();
-		User currentUser=(User)session.getAttribute("user");//µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
-		if(currentUser!=null){
-			if(currentUser.getUserId()==user.getUserId())//ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§ ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
-			{flag=1;
-				
+		Integer flag = 0;
+		User user = userDao.getUserById(activityPics.get(0).getUserId());// µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+		HttpSession session = request.getSession();
+		User currentUser = (User) session.getAttribute("user");// µÃµ½µ±Ç°ÓÃ»§¶ÔÏó
+		if (currentUser != null) {
+			if (currentUser.getUserId() == user.getUserId())// ËµÃ÷µ±Ç°ÓÃ»§¾ÍÊÇ´Ë»î¶¯·¢ÆðÓÃ»§
+															// ËùÒÔÓÐÍ¼Æ¬ÉÏ´«µÄÈ¨ÏÞ
+			{
+				flag = 1;
+
 			}
 		}
-		view.addObject("flag",flag);
+		view.addObject("flag", flag);
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈÝÆ÷´«»ØÒ³Ãæ
 		view.addObject("activityAlbum", activityAlbumList.get(0));
 		view.addObject("activityPics", result);// ½«activityPics·ÅÈëÈÝÆ÷
-		view.addObject("activityId",activityId);//
+		view.addObject("activityId", activityId);//
 		// ´«»ØÒ³Ãæ£¡
 		view.setViewName("activity/showPicList");// ÉèÖÃ¶ÔÓ¦µÄÊÓÍ¼view/activity/showPicList.jsp
 		return view;
@@ -1445,8 +1452,9 @@ if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ
 		ModelAndView view = new ModelAndView();
 		Integer activityPicId = Integer.parseInt(request
 				.getParameter("activityPicId"));
-		Integer activityId = Integer.parseInt(request.getParameter("activityId"));
-	String albumName=request.getParameter("albumName");
+		Integer activityId = Integer.parseInt(request
+				.getParameter("activityId"));
+		String albumName = request.getParameter("albumName");
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
@@ -1461,7 +1469,8 @@ if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ
 		activityPicComment.setUserId(userId);
 		activityPicCommentDao.addActivityPicComment(activityPicComment);
 		view.setViewName("redirect:showPic.action?activityPicId="
-				+ activityPicId+"&albumName="+albumName+"&activityId="+activityId);// ÉèÖÃ¶ÔÓ¦µÄÊÓÍ¼
+				+ activityPicId + "&albumName=" + albumName + "&activityId="
+				+ activityId);// ÉèÖÃ¶ÔÓ¦µÄÊÓÍ¼
 		return view;
 
 	}
@@ -1471,10 +1480,11 @@ if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ
 	public ModelAndView showPic(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		ModelAndView view = new ModelAndView();
-		Integer activityId = Integer.parseInt(request.getParameter("activityId"));
-		Integer activityPicId = Integer.parseInt(request.getParameter("activityPicId"));		
-		
-	
+		Integer activityId = Integer.parseInt(request
+				.getParameter("activityId"));
+		Integer activityPicId = Integer.parseInt(request
+				.getParameter("activityPicId"));
+
 		String albumName = request.getParameter("albumName");
 		List<ActivityPic> activityPics = activityPicDao
 				.getActivityPicByCondition(activityPicId, 0);// µÃµ½ÏàÆ¬id
@@ -1512,15 +1522,15 @@ if(activityAlbumDao.getActivityAlbumByCondition(0, albumId)==null){//Èç¹ûÏà²á²éÑ
 		for (Integer i = 0; i < pageNumbers; i++) {
 			pages[i] = i + 1 + "";
 		}
-      //  Integer flag=0;//0ÎªÓÐ×Ê¸ñÉÏ´« 1ÎªÃ»ÓÐ×Ê¸ñÉÏ´«
-		User user=userDao.getUserById(activityPics.get(0).getUserId());//µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
-		
+		// Integer flag=0;//0ÎªÓÐ×Ê¸ñÉÏ´« 1ÎªÃ»ÓÐ×Ê¸ñÉÏ´«
+		User user = userDao.getUserById(activityPics.get(0).getUserId());// µÃµ½ÕÕÆ¬ÉÏ´«Õß¶ÔÏó
+
 		view.addObject("pageNumbers", pages);// ½«Ò»¹²¶àÉÙÒ³·ÅÈëÈÝÆ÷´«»ØÒ³Ãæ
 		view.addObject("userCommentList", result);
 		view.addObject("albumName", albumName);
 		view.addObject("activityPicId", activityPics.get(0).getPicId());
-		view.addObject("user",user);
-		view.addObject("activityId",activityId);
+		view.addObject("user", user);
+		view.addObject("activityId", activityId);
 		view.addObject("activityPics", activityPics.get(0));// ½«activityPics·ÅÈëÈÝÆ÷
 		// ´«»ØÒ³Ãæ£¡
 		view.setViewName("activity/showPic");// ÉèÖÃ¶ÔÓ¦µÄÊÓÍ¼view/activity/showPic.jsp

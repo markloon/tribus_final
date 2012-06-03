@@ -5,9 +5,9 @@
 	<session-factory>
 		<!-- Database connection settings -->
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/tribus?characterEncoding=gbk</property>
-		<property name="connection.username">marsna</property>
-		<property name="connection.password">marsna</property>
+		<property name="connection.url">jdbc:mysql://50.31.147.38/tribus_tribus?characterEncoding=gbk</property>
+		<property name="connection.username">tribus_admin</property>
+		<property name="connection.password">fuzan19841022</property>
 		<!-- JDBC connection pool (use the built-in) -->
 		<property name="connection.pool_size">32</property>
 		<!-- SQL dialect -->

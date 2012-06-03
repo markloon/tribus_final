@@ -122,11 +122,21 @@ function getResult() {
             <div id="header_rgt"><!--start header_rgt-->
             	<div id="menu_bg"><div id="menu_lft"><div id="menu_rgt">
                     <ul>
-                    	<li class="current_page_item"><a href="#">CITY</a></li>
-                    	<li><a href="#" title="MOVIE">MOVIE</a></li>
-                        <li><a href="#" title="BOOK">BOOK</a></li>
-                        <li><a href="#" title="MUSIC">MUSIC</a></li>
-                        <li><a href="#" title="MY TRIBUS">MY TRIBUS</a></li>
+                    	<li class="current_page_item">
+										<a href="activity/index.action">CITY</a>
+									</li>
+									<li>
+										<a href="movie/movieHomePage.action" title="MOVIE">MOVIE</a>
+									</li>
+									<li>
+										<a href="book/bookHomePage.action" title="BOOK">BOOK</a>
+									</li>
+									<li>
+										<a href="music/musicHomePage.action" title="MUSIC">MUSIC</a>
+									</li>
+									<li>
+										<a href="user/my.action" title="user/my.action">MY TRIBUS</a>
+									</li>
                     </ul>
                     <div class="header_search">
                     	<form action="#">
@@ -162,7 +172,7 @@ function getResult() {
                             <a href="#"><img src="${path1}activity/img/icon_message4.jpg" alt="" width="22" height="22" /></a>
                         </div>
                         <div class="address">
-                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>">welcome back,<%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
+                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>"><%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
                             <span>New York City</span>
                         </div>
                     </div><!--//end #social_box-->

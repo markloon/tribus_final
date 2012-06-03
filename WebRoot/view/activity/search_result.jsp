@@ -7,6 +7,7 @@ List<SuperActivity> activityList=(List<SuperActivity>)request.getAttribute("acti
 		User user=(User)session.getAttribute("user");	
 		String condition=(String)request.getAttribute("condition");
 request.setAttribute("path1",GlobleConfig.pathPath);
+request.setAttribute("path2",GlobleConfig.pathPath1);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -95,7 +96,7 @@ function getResult() {
     function getResult1() {
     if (http_request.readyState == 4) {     							// 判断请求状态
         if (http_request.status == 200) {     							// 请求成功，开始处理返回结果
-            document.getElementById(event1+"").value=http_request.responseText;	//设置提示内容
+            document.getElementById(event1+"").innerHTML="+  "+http_request.responseText;	//设置提示内容
 
         } else {     													// 请求页面有错误
             alert("您所请求的页面有错误！");
@@ -113,11 +114,21 @@ function getResult() {
             <div id="header_rgt"><!--start header_rgt-->
             	<div id="menu_bg"><div id="menu_lft"><div id="menu_rgt">
                     <ul>
-                    	<li class="current_page_item"><a href="#">CITY</a></li>
-                    	<li><a href="#" title="MOVIE">MOVIE</a></li>
-                        <li><a href="#" title="BOOK">BOOK</a></li>
-                        <li><a href="#" title="MUSIC">MUSIC</a></li>
-                        <li><a href="#" title="MY TRIBUS">MY TRIBUS</a></li>
+                    	<li class="current_page_item">
+										<a href="${path2}activity/index.action">CITY</a>
+									</li>
+									<li>
+										<a href="${path2}movie/movieHomePage.action" title="MOVIE">MOVIE</a>
+									</li>
+									<li>
+										<a href="${path2}book/bookHomePage.action" title="BOOK">BOOK</a>
+									</li>
+									<li>
+										<a href="${path2}music/musicHomePage.action" title="MUSIC">MUSIC</a>
+									</li>
+									<li>
+										<a href="${path2}user/my.action" title="user/my.action">MY TRIBUS</a>
+									</li>
                     </ul>
                     <div class="header_search">
                     	<form action="#">
@@ -127,7 +138,7 @@ function getResult() {
                     </div>
                     <div class="header_icon_area">
                     	<span class="space_btm"><a href="#"><img src="${path1}activity/img/icon_header1.png" alt="" /></a></span>
-                        <span><a href="#"><img src="${path1}activity/img/icon_header2.png" alt="" /></a></span>
+                        <span><a href="${path2}user/editForm.action"><img src="${path1}activity/img/icon_header2.png" alt="" /></a></span>
                     </div>
                 </div></div></div>
             </div><!--//end #header_rgt-->
@@ -147,13 +158,13 @@ function getResult() {
                     </div>
                     <div id="social_box"><!--start social_box-->
                     	<div id="message">
-                        	<a href="#"><img src="${path1}activity/img/icon_message1.jpg" alt="" /><span>5</span></a>
+                        	<a href="${path2}userMail/box/0/0.action"><img src="${path1}activity/img/icon_message1.jpg" alt="" /><span>5</span></a>
                             <a href="#"><img src="${path1}activity/img/icon_message2.jpg" alt="" /></a>
                             <a href="#"><img src="${path1}activity/img/icon_message3.jpg" alt="" /></a>
                             <a href="#"><img src="${path1}activity/img/icon_message4.jpg" alt="" /></a>
                         </div>
                         <div class="address">
-                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>">welcome back,<%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
+                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>"><%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
                             <span>New York City</span>
                         </div>
                     </div><!--//end #social_box-->
@@ -176,29 +187,19 @@ function getResult() {
                                 <p>${item.activity.activityCity } ,${item.activity.activityStreet }<br />Start Date: ${item.activity.activityStartTime}<br/>End Date: ${item.activity.activityFinishTime }</p>
                                 <span><a href="activity/info.action?activityId=${item.activity.activityId} "><img src="${path1}activity/img/tripple_arrow3.jpg" alt="" /></a></span>
                                 <ul>
-                                <li>
-                                <c:choose>
-                                	<c:when test="${item.owner == null}" >
-                                	<input id="bt${index.index }" type="button" name="Submit" value=   <c:choose><c:when test="${item.followed eq true}">unFollow </c:when> <c:otherwise>Follow</c:otherwise></c:choose>
-			onclick="followActivity('activity/followActivity.action?activityId=${item.activity.activityId }','bt${index.index }')"/>
-                                	</c:when >
-                                	    <c:otherwise>
-                                            you are the host
-                                          </c:otherwise>
-				                   
-				                    </c:choose>
-				                     </li>
-				                    
 				                    <li>
 				                    <c:choose>
                                     <c:when test="${item.owner eq null}" >
-                                	<input id="at${index.index }" type="button" name="Submit" value=<c:choose><c:when test="${item.joined eq true}">unJoin </c:when> <c:otherwise>Join</c:otherwise></c:choose>
-			onclick="joinActivity('activity/joinActivity.action?activityId=${item.activity.activityId }','at${index.index }')"/>
+                                	
+                                	 <a id="at${index.index }"  href="javascript:joinActivity('activity/joinActivity.action?activityId=${item.activity.activityId }','at${index.index }')"><c:choose><c:when test="${item.joined eq true}">+ Unjoin</c:when> <c:otherwise>+ Join</c:otherwise></c:choose>
                                 	</c:when >
                                 	    <c:otherwise>
                                             you are the host
                                           </c:otherwise>
-                                          </c:choose></li></ul>
+                                          </c:choose></li>
+                                              <li><a href="addWishList/city/${activityInfo.activityId}.action">+ Wish List</a></li>
+                                              <li><a href="addTribusList/city/${activityInfo.activityId}.action">+ Tribus List</a></li>
+                                          </ul>
                             </div><!--//end .search_info-->
                         </div><!--//end .search_post-->
                       </c:forEach>

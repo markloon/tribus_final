@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	int day1=0;
 	if(latestActivity!=null){
 	day1=latestActivity.getActivityStartTime().getDate();}
-
+request.setAttribute("path2",GlobleConfig.pathPath1);
 	request.setAttribute("path1",GlobleConfig.pathPath);
 	%>
 
@@ -38,9 +38,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 		<link rel="stylesheet" type="text/css" media="screen,projection"
-			href="../tribus/view/activity/font/font.css" />
+			href="${path1}activity/font/font.css" />
 		<link rel="stylesheet" type="text/css" media="screen,projection"
-			href="../tribus/view/activity/css/style.css" /> 
+			href="${path1}activity/css/style.css" /> 
 		<script type="text/javascript">
 function search(){
 var a =document.getElementById("txt1");
@@ -55,7 +55,7 @@ window.location.href="activity/search.action?searchCondition="+a.value;
 			<div id="header">
 				<!--start header-->
 				<div class="logo">
-					<a href="index.html"><img src="${path1}activity/img/logo.png" alt="" />
+					<a href="${path2}activity/index.action"><img src="${path1}activity/img/logo.png" alt="" />
 					</a>
 				</div>
 				<div id="header_rgt">
@@ -65,19 +65,19 @@ window.location.href="activity/search.action?searchCondition="+a.value;
 							<div id="menu_rgt">
 								<ul>
 									<li class="current_page_item">
-										<a href="activity/index.action">CITY</a>
+										<a href="${path2}activity/index.action">CITY</a>
 									</li>
 									<li>
-										<a href="movie/movieHomePage.action" title="MOVIE">MOVIE</a>
+										<a href="${path2}movie/movieHomePage.action" title="MOVIE">MOVIE</a>
 									</li>
 									<li>
-										<a href="book/bookHomePage.action" title="BOOK">BOOK</a>
+										<a href="${path2}book/bookHomePage.action" title="BOOK">BOOK</a>
 									</li>
 									<li>
-										<a href="music/musicHomePage.action" title="MUSIC">MUSIC</a>
+										<a href="${path2}music/musicHomePage.action" title="MUSIC">MUSIC</a>
 									</li>
 									<li>
-										<a href="#" title="user/my.action">MY TRIBUS</a>
+										<a href="${path2}user/my.action" title="MY TRIBUS">MY TRIBUS</a>
 									</li>
 								</ul>
 								<div class="header_search">
@@ -95,7 +95,7 @@ window.location.href="activity/search.action?searchCondition="+a.value;
 												src="${path1}activity/img/icon_header1.png" alt="" />
 									</a>
 									</span>
-									<span><a href="#"><img src="${path1}activity/img/icon_header2.png"
+									<span><a href="${path2}user/editForm.action"><img src="${path1}activity/img/icon_header2.png"
 												alt="" />
 									</a>
 									</span>
@@ -137,7 +137,7 @@ onblur="if(this.value=='')(this.value='Music, Musicial, Album, tribus music list
 						<div id="social_box">
 							<!--start social_box-->
 							<div id="message">
-								<a href="#"><img src="${path1}activity/img/icon_message1.jpg" alt="" /><span>5</span>
+								<a href="${path2}userMail/box/0/0.action"><img src="${path1}activity/img/icon_message1.jpg" alt="" /><span>5</span>
 								</a>
 								<a href="#"><img src="${path1}activity/img/icon_message2.jpg" alt="" />
 								</a>
@@ -149,7 +149,7 @@ onblur="if(this.value=='')(this.value='Music, Musicial, Album, tribus music list
 							<div class="address">
 								<h3>
 									<%if(u==null){%><a href="user/login.action">login</a>
-									<%}else{ %>Welcome back,
+									<%}else{ %>
 									<a href="user/my/<%=u.getUserId()%>"><%=u.getUserAlias()%>
 										<%} %>
 									</a>
@@ -191,7 +191,7 @@ onblur="if(this.value=='')(this.value='Music, Musicial, Album, tribus music list
 												Your Next City Events
 											</h3>
 											<p>
-											<%if(latestActivity==null){ %>本月剩余时间无活动<%}else{ %><a href="activity/info.action?activityId=<%=latestActivity.getActivityId() %>"><%=latestActivity.getActivityStartTime() %>&nbsp<%=latestActivity.getActivityName() %> <%} %></a>
+											<%if(latestActivity==null){ %>No events among this month<%}else{ %><a href="activity/info.action?activityId=<%=latestActivity.getActivityId() %>"><%=latestActivity.getActivityStartTime() %>&nbsp<%=latestActivity.getActivityName() %> <%} %></a>
 												
 											</p>
 										</div>

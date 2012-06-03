@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			List activityAlbumList=(List)request.getAttribute("activityAlbum");
 				
 	request.setAttribute("path1",GlobleConfig.pathPath);
+	request.setAttribute("path2",GlobleConfig.pathPath1);
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -103,7 +104,7 @@ map.openInfoWindow(map.getCenter(),
 function getResult() {
     if (http_request.readyState == 4) {     							// 判断请求状态
         if (http_request.status == 200) {     							// 请求成功，开始处理返回结果
-            document.getElementById("bt1").value=http_request.responseText;;	//设置提示内容
+            document.getElementById("bt1").innerHTML=http_request.responseText;;	//设置提示内容
  
         } else {     													// 请求页面有错误
             alert("您所请求的页面有错误！");
@@ -136,7 +137,7 @@ function getResult() {
     function getResult1() {
     if (http_request.readyState == 4) {     							// 判断请求状态
         if (http_request.status == 200) {     							// 请求成功，开始处理返回结果
-            document.getElementById("bt2").value=http_request.responseText;;	//设置提示内容
+            document.getElementById("bt2").innerHTML=http_request.responseText;;	//设置提示内容
  
         } else {     													// 请求页面有错误
             alert("您所请求的页面有错误！");
@@ -208,24 +209,24 @@ function getResult() {
   
 	<div id="wrapper"><!--start wrapper-->
     	<div id="header"><!--start header-->
-        	<div class="logo"><a href="index.html"><img src="${path1}activity/img/logo.png" alt="" width="59" height="65" /></a></div>
+        	<div class="logo"><a href="${path2}activity/index.action"><img src="${path1}activity/img/logo.png" alt="" width="59" height="65" /></a></div>
             <div id="header_rgt"><!--start header_rgt-->
             	<div id="menu_bg"><div id="menu_lft"><div id="menu_rgt">
                     <ul>
-                    			<li class="current_page_item">
-										<a href="activity/index.action">CITY</a>
+                    		<li class="current_page_item">
+										<a href="${path2}activity/index.action">CITY</a>
 									</li>
 									<li>
-										<a href="movie/movieHomePage.action" title="MOVIE">MOVIE</a>
+										<a href="${path2}movie/movieHomePage.action" title="MOVIE">MOVIE</a>
 									</li>
 									<li>
-										<a href="book/bookHomePage.action" title="BOOK">BOOK</a>
+										<a href="${path2}book/bookHomePage.action" title="BOOK">BOOK</a>
 									</li>
 									<li>
-										<a href="music/musicHomePage.action" title="MUSIC">MUSIC</a>
+										<a href="${path2}music/musicHomePage.action" title="MUSIC">MUSIC</a>
 									</li>
 									<li>
-										<a href="user/my.action" title="My TRIBUS">MY TRIBUS</a>
+										<a href="${path2}user/my.action" title="user/my.action">MY TRIBUS</a>
 									</li>
                     </ul>
                     <div class="header_search">
@@ -236,7 +237,7 @@ function getResult() {
                     </div>
                     <div class="header_icon_area">
                     	<span class="space_btm"><a href="#"><img src="${path1}activity/img/icon_header1.png" alt="" width="10" height="11" /></a></span>
-                        <span><a href="#"><img src="${path1}activity/img/icon_header2.png" alt="" width="12" height="13" /></a></span>
+                        <span><a href="${path2}user/editForm.action"><img src="${path1}activity/img/icon_header2.png" alt="" width="12" height="13" /></a></span>
                     </div>
                 </div></div></div>
             </div><!--//end #header_rgt-->
@@ -256,13 +257,13 @@ function getResult() {
                     </div>
                     <div id="social_box"><!--start social_box-->
                     	<div id="message">
-                        	<a href="#"><img src="${path1}activity/img/icon_message1.jpg" alt="" width="22" height="22" /><span>5</span></a>
+                        	<a href="${path2}userMail/box/0/0.action"><img src="${path1}activity/img/icon_message1.jpg" alt="" width="22" height="22" /><span>5</span></a>
                             <a href="#"><img src="${path1}activity/img/icon_message2.jpg" alt="" width="22" height="22" /></a>
                             <a href="#"><img src="${path1}activity/img/icon_message3.jpg" alt="" width="22" height="22" /></a>
                             <a href="#"><img src="${path1}activity/img/icon_message4.jpg" alt="" width="22" height="22" /></a>
                         </div>
                         <div class="address">
-                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>">welcome back,<%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
+                        	<h3><%if(user!=null){ %><a href="user/my/<%=user.getUserId()%>"><%=user.getUserAlias()%></a><%}else{ %><a href="user/login.action">login</a><%} %></h3>
                             <span>New York City</span>
                         </div>
                     </div><!--//end #social_box-->
@@ -277,19 +278,18 @@ function getResult() {
                             <div id="product_rgtcol"><!--start product_rgtcol-->
                             	<p>Start Date: ${activityInfo.activityStartTime}<br />End Date: ${activityInfo.activityFinishTime}<br />PLace: ${activityInfo.activityCity} ${activityInfo.activityStreet} ${activityInfo.activityState}<br />Starter:<br />
                                 Type: ${activityClassified}<br />Fees: ${activityInfo.activityFees} USD</p>
-                                <div class="wish_listbox">
-                                	<ul>
-                                    	<li><%if(owner==null) {%>
-				<input id="bt1" type="button" name="Submit" value="<%if(followed.equals("true")){%>unFollow<%}else{%>Follow<%}%>" 
-			onclick="followActivity('activity/followActivity.action?activityId=${activityId}')"/></li>
-                                        <li><input id="bt2" type="button" name="Submit" value="<%if(joined.equals("true")){%>unJoin<%}else{%>Join<%}%>" 
-			onclick="joinActivity('activity/joinActivity.action?activityId=${activityId}')"/><%} %></li>
-                                      
-                                    </ul>
-                                    <div class="facebook_icon_area">
-                                    	<a href="#"><img src="${path1}activity/img/icon_facebook.jpg" alt="" width="24" height="24" /></a>
-                                        <a href="#"><img src="${path1}activity/img/icon_tweet.jpg" alt="" width="24" height="24" /></a>
-                                    </div>
+                                <div class="king_wish">
+                                	<a href="addWishList/city/${activityInfo.activityId}.action">+ Wish List</a><a href="addTribusList/city/${activityInfo.activityId}.action">+ Tribus List</a>
+                                </div>
+                                <div class="king_social">
+                                	<a href="#"><img src="${path1}activity/img/icon_facebook.jpg" alt="" width="24" height="24" /></a>
+                                    <a href="#"><img src="${path1}activity/img/icon_tweet.jpg" alt="" width="24" height="24" /></a>
+                                </div>
+                               
+                                <div class="king_done"><%if(owner==null) {%>
+                                	<a id="bt1"  class="selectOne" href="javascript:followActivity('activity/followActivity.action?activityId=${activityId}')"><%if(followed.equals("true")){%>unFollow<%}else{%>Follow<%}%></a>
+                                    <a id="bt2"  class="selectTwo click_done" href="javascript:joinActivity('activity/joinActivity.action?activityId=${activityId}')"><%if(joined.equals("true")){%>unJoin<%}else{%>Join<%}%></a>
+                               <%}else{ %>You are the host<%} %>
                                 </div>
                                
                              

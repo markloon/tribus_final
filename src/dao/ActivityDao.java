@@ -91,9 +91,8 @@ public class ActivityDao {
 
 	public List<Activity> getHottestActivity() {
 
-		String sql = "select * from Activity order by activityPriority desc limit 5 ";
-		return TribusHibernateSessionFactory.currentSession().createSQLQuery(sql)
-				.addEntity(Activity.class).list();
+		String sql = "select * from activity order by activityPriority desc limit 5 ";
+		return TribusHibernateSessionFactory.currentSession().createSQLQuery(sql).addEntity(Activity.class).list();
 	}
 
 	public List<String> getTopTribusCity() {
